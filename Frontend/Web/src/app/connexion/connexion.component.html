@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="col-10">
+        <form #userGet="ngForm">
+          <fieldset>
+            <legend>Connexion</legend>
+            <div class="form-group">
+              <label>E-mail :</label>
+              <input type="email" id="connexionMail" class="form-control" ngModel placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+            </div>
+            <div class="form-group">
+              <label>Mot de passe :</label>
+              <input type="password" id="connexionPswd" class="form-control" ngModel placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+            </div>
+            <button class="btn btn-primary" type="submit" [disabled]="!userGet.form.valid">sign in</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

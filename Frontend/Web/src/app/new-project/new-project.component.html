@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="col-10">
+        <form id="formProjectPost" #ProjectPost="ngForm">
+          <fieldset>
+          <legend>Création projet</legend>
+            <div class="form-group">
+              <label>Nom Projet :</label>
+              <input class="form-control" type="text" name="formProjectName" ngModel
+                   placeholder="Saisissez le nom du projet" required>
+            </div>
+            <div class="form-group">
+              <label>Client :</label>
+              <select class="form-control">
+                <!-- option *ngFor="let i of lstClient" && {{i.nomClient}} -->
+                <option>
+                  changement quand api dispo
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Type de projet :</label>
+              <!-- option *ngFor="let i of lstClient" && {{i.nomClient}} -->
+              <select class="form-control">
+                <option>
+                  changement quand api dispo
+                </option>
+                <option>
+                  Long Project
+                </option>
+                <option>
+                  Medium Project
+                </option>
+                <option>
+                  Short Project
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+            <label>description :</label>
+            <textarea class="form-control" form="formProjectPost" name="formProjectDescription" ngModel
+                      placeholder="donnez une description du projet"></textarea>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="!ProjectPost.form.valid">Enregistrer Projet</button>
+          </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

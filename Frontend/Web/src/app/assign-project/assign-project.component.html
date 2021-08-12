@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="col-10">
+        <form #userGet="ngForm">
+          <fieldset>
+            <legend>Assignation du personnel</legend>
+            <div class="form-group">
+              <label>Projet :</label>
+              <!-- option *ngFor="let i of lstProject" && {{i.nomProject}} -->
+              <select class="form-control">
+                <option>
+                  Nom de Projet (En attente d'api)
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tâche :</label>
+              <!-- option *ngFor="let i of lstTask" && {{i.nomTask}} -->
+              <select class="form-control">
+                <option>
+                  Nom de Tâche (En attente d'api)
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Employé :</label>
+              <!-- option *ngFor="let i of lstEmp" && {{i.nomEmp}} -->
+              <select class="form-control">
+                <option>
+                  Nom de Employé (En attente d'api)
+                </option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="submit" [disabled]="!userGet.form.valid">Validation</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div><br>
+
+<h3>Tableaux des travaux en cours</h3>
+<table>
+  <thead>
+    <th>Projet</th>
+    <th>Tâche</th>
+    <th>Employé</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Test</td>
+      <td>API</td>
+      <td>Maxime</td>
+    </tr>
+  </tbody>
+</table>
+
