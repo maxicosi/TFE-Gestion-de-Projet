@@ -1,26 +1,25 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <div class="col-10">
-        <form id="formProjectPost" #ProgPost="ngForm">
+      <div class="col-4">
+        <form [formGroup]="ProgrammeForm" id="formProgrammePost" (ngSubmit)="submit()">
           <fieldset>
-            <legend>Création Programme</legend>
+            <legend>Create Programme</legend>
             <div class="form-group">
-              <label>Projet auquel la Programme est associée :</label>
-              <!-- option *ngFor="let i of lstTask" && {{i.nomTask}} -->
-              <select class="form-control">
-                <option>
-                  Nom de Projet (En attente d'api)
+              <label>Poject Assignated :</label>
+              <select formControlName="formProgrammeProjectId" class="form-control">
+                <option *ngFor="let Project of lstProjects" name="fromProgrammeProjectId" [value]="Project.ProjectId">
+                  {{Project.ProjectName}}
                 </option>
               </select>
             </div>
             <div class="form-group">
-              <label>Nom Programme :</label>
-              <input class="form-control" type="text" name="formProjectName" ngModel
-                     placeholder="Saisissez le nom du programme" required>
+              <label>Programme name :</label>
+              <input formControlName="formProgrammeName" class="form-control" type="text" name="formProgrammeName"
+                     placeholder="Programme name" required>
             </div>
             <div class="form-group">
-              <button class="btn btn-primary" type="submit" [disabled]="!ProgPost.form.valid">Enregistrer Programme</button>
+              <button class="btn btn-primary" type="submit">Enregistrer Programme</button>
             </div>
           </fieldset>
         </form>

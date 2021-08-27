@@ -14,7 +14,14 @@ import { NewTaskComponent } from './new-task/new-task.component';
 import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
 import { NewProgrammeComponent } from './new-programme/new-programme.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { TimesheetComponent } from './timesheet/timesheet.component';
+import {CustomerService} from "./services/customer.service";
+import {CountryService} from "./services/country.service";
+import {CategoryService} from "./services/category.service";
+import {ProjectService} from "./services/project.service";
+import {PostProjectService} from "./services/post-project.service";
+import {PostTaskService} from "./services/post-task.service";
 
 @NgModule({
   declarations: [
@@ -29,15 +36,17 @@ import {FormsModule} from "@angular/forms";
     NewTaskComponent,
     FilterComponent,
     SearchComponent,
-    NewProgrammeComponent
+    NewProgrammeComponent,
+    TimesheetComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CustomerService, CountryService, CategoryService, ProjectService, PostProjectService, PostTaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

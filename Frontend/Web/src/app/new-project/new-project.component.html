@@ -1,63 +1,48 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <div class="col-10">
-        <form id="formProjectPost" #ProjectPost="ngForm">
+      <div class="col-4">
+        <form id="formProjectPost" [formGroup]="projectForm" (ngSubmit)="submit()">
           <fieldset>
-          <legend>Création projet</legend>
+            <legend>Create Project</legend>
             <div class="form-group">
-              <label>Nom Projet :</label>
-              <input class="form-control" type="text" name="formProjectName" ngModel
-                   placeholder="Saisissez le nom du projet" required>
+              <label>Project Name :</label>
+              <input class="form-control" formControlName="formProjectName" type="text" name="formProjectName"
+                   placeholder="Project Name" required>
             </div>
             <div class="form-group">
-              <label>Client :</label>
-              <select class="form-control">
-                <!-- option *ngFor="let i of lstClient" && {{i.nomClient}} -->
-                <option>
-                  changement quand api dispo
+              <label>Project type :</label>
+              <select formControlName="formProjectCategoryId" class="form-control"  required >
+                <option *ngFor="let category of lstCategory" name="formProjectCategoryId" [value]="category.CategoryId">
+                  {{category.CategoryName}}
                 </option>
               </select>
             </div>
             <div class="form-group">
-              <label>Type de projet :</label>
-              <!-- option *ngFor="let i of lstClient" && {{i.nomClient}} -->
-              <select class="form-control">
-                <option>
-                  changement quand api dispo
-                </option>
-                <option>
-                  Long Project
-                </option>
-                <option>
-                  Medium Project
-                </option>
-                <option>
-                  Short Project
+              <label>Customer :</label>
+              <select formControlName="formProjectCustomerId" class="form-control" required>
+                <option *ngFor="let customer of lstCustomer" name="formProjectCustomerId" [value]="customer.CustomerId">
+                  {{customer.CustomerName}}
                 </option>
               </select>
             </div>
             <div class="form-group">
-              <label>date de début de projet :</label>
-              <input class="form-control" type="date">
+              <label>Start date of the project :</label>
+              <input formControlName="formProjectStartDate" class="form-control" type="date" name="formProjectSartDate" required>
             </div>
             <div class="form-group">
-              <label>date de fin de projet estimé :</label>
-              <input class="form-control" type="date">
-            </div>
-            <div class="form-group">
-              <label>date réelle de fin de projet :</label>
-              <input class="form-control" type="date">
+              <label>End date of the project :</label>
+              <input formControlName="formProjectEndDate" class="form-control" type="date" name="fromProjectEndDate" required>
             </div>
             <div class="form-group">
             <label>description :</label>
-            <textarea class="form-control" form="formProjectPost" name="formProjectDescription" ngModel
-                      placeholder="donnez une description du projet"></textarea>
+            <textarea formControlName="formProjectDescription" class="form-control" name="formProjectDescription"
+                      placeholder="describe the project" [defaultValue]=""></textarea>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="submit" [disabled]="!ProjectPost.form.valid">Enregistrer Projet</button>
+            <button class="btn btn-primary" type="submit">Register Project</button>
           </div>
-          </fieldset>
+            </fieldset>
         </form>
       </div>
     </div>
