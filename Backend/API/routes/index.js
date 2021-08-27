@@ -135,9 +135,9 @@ router.get('/customers', function(req,res,next){
   });
 });
 
-router.get('/Affichage', function(req,res,next){
-  console.log('API GET Status');
-  res.locals.connection.query('SELECT ProjectName, TaskName, CustomerName, TimeDone, StartDate, EndDate FROM PostProject', function(error, results, fields) {
+router.get('/affichage', function(req,res,next){
+  console.log('API GET affichage');
+  res.locals.connection.query('SELECT ProjectName,TaskName, CustomerName, StatusName, Work.TimeDone, DATE_FORMAT(StartDate, "%D %b %Y") as StartDate, DATE_FORMAT(EndDate, "%D %b %Y") as EndDate FROM Project JOIN Category ON Project.CategoryId = Category.CategoryId JOIN Status ON Project.StatusId = Status.StatusId JOIN Customers ON Project.CustomerID = Customers.CustomerId JOIN Work ON Project.ProjectId = Work.projectId JOIN Task ON Project.ProjectId = Task.ProjectId', function(error, results, fields) {
     if (error!=null) {
       res.redirect(529, '/error');
       console.log("erreur querry");
