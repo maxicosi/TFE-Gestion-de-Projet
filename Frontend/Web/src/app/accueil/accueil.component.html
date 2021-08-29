@@ -1,18 +1,46 @@
 
-<h3>Tableau des Projets en cours</h3>
+<body>
 <label>search : </label>
-<Input type="search" placeholder="Project name" size="22">
+<Input name="input" type="search" placeholder="Project name" size="22">
 <table>
   <thead>
-    <th>Project</th>
-    <th>Task</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Time done</th>
-    <th>Time needed</th>
-    <th>Customer</th>
+  <th>Project ID</th>
+  <th>Project Name</th>
+  <th>Category</th>
+  <th>Status</th>
+  <th>Time Done</th>
+  <th>Start Date</th>
+  <th>End Date</th>
+  <th>Description</th>
   </thead>
   <tbody >
-
+    <tr *ngFor="let project of lstProjects">
+      <td>
+        {{project.ProjectId}}
+      </td>
+      <td routerLink="/Project/{{project.ProjectId}}">
+        {{project.ProjectName}}
+      </td>
+      <td>
+        {{project.Category}}
+      </td>
+      <td>
+        {{project.Status}}
+      </td>
+      <td>
+        {{project.TimeDone}}
+      </td>
+      <td>
+        {{project.StartDate}}
+      </td>
+      <td>
+        {{project.EndDate}}
+      </td>
+      <td>
+        {{project.description}}
+      </td>
+    </tr>
   </tbody>
 </table>
+</body>
+

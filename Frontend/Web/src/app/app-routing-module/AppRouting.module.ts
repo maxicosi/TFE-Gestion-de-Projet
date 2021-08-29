@@ -6,6 +6,10 @@ import {AssignProjectComponent} from "../assign-project/assign-project.component
 import { ConnexionComponent } from "../connexion/connexion.component";
 import {NewTaskComponent} from "../new-task/new-task.component";
 import {NewProgrammeComponent} from "../new-programme/new-programme.component";
+import {Affichage} from "../classes/affichage";
+import {ProjectComponent} from "../project/project.component";
+import {TaskComponent} from "../task/task.component";
+
 
 const routes: Routes = [
   {
@@ -35,6 +39,14 @@ const routes: Routes = [
   {
     path : 'NewProgramme',
     component : NewProgrammeComponent
+  },
+  {
+    path: 'Project/:ProjectId',
+    component: ProjectComponent
+  },
+  {
+    path: 'Task/:TaskId',
+    component: TaskComponent
   }
 ];
 

@@ -3,6 +3,10 @@ import {PostWorkService} from "../services/post-work.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ProjectService} from "../services/project.service";
 import {GetProject} from "../classes/GetProject";
+import {Tasks} from "../classes/tasks";
+import {TaskService} from "../services/task.service";
+import {Users} from "../classes/Users";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-assign-project',
@@ -15,17 +19,21 @@ export class AssignProjectComponent implements OnInit {
     private postWork: PostWorkService,
     private readonly formBuilder: FormBuilder,
     private getProject: ProjectService,
+    private getTask: TaskService,
+    private getUsers: UserService
   ) {}
 
-  // lstTasks: tasks[] | undefined
-  // lstUsers: Users[] | undefined
+  lstTasks: Tasks[] | undefined;
+  lstUsers: Users[] | undefined
   lstProjects: GetProject[] | undefined;
 
   workForm = this.formBuilder.group({
     formWorkProjectId: [null, Validators.required],
     formWorkTaskId: [null, Validators.required],
     formWorkUserId: [null, Validators.required],
-    formWorkAssignedTime: [null, Validators.required]
+    formWorkAssignedTime: [null, Validators.required],
+    formWorkStartDate:[null, Validators.required],
+    formWorkEndDate:[null, Validators.required]
   })
   ngOnInit(): void {
     this.getProject.getProject()
@@ -34,21 +42,23 @@ export class AssignProjectComponent implements OnInit {
           this.lstProjects = data.response;
         }
       );
-    /*
+
     this.getTask.getTask()
       .subscribe(
         data => {
           this.lstTasks = data.response;
         }
-      );0
+      );
+
     this.getUsers.getUsers()
       .subscribe(
         data => {
           this.lstUsers = data.response;
         }
-      );
-      */
+      )
   }
+
+
 
   submit() {
     if(this.workForm.invalid) {

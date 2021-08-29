@@ -4,6 +4,8 @@ export class PostWork {
     TaskId: number,
     UserId: number,
     AssignedTime: number,
-    TimeDone: number
+    TimeDone: number,
+    StartDate: Date,
+    EndDate: Date
   ){}
 }

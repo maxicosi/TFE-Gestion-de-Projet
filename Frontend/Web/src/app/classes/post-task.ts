@@ -5,7 +5,9 @@ export class PostTask {
     TaskName: string,
     ProjectId: number,
     TotalTime: number,
-    AssignedTime: number
+    AssignedTime: number,
+    StartDate: Date,
+    EndDate: Date
   ){}
 
 }

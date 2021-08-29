@@ -6,14 +6,12 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-
-  constructor(
-    private http: HttpClient
-  ) {
+export class AffichageService {
+  constructor(private http: HttpClient) {
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(environment.apiUrl + '/users');
+
+  getAffichage(): Observable<any> {
+    return this.http.get(environment.apiUrl + '/affichage');
   }
 }

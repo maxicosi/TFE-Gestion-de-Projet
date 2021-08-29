@@ -11,7 +11,7 @@
                 </option>
               </select>
             </div>
-            <!--<div class="form-group">
+            <div class="form-group">
               <label>Task :</label>
                <select formControlName="formWorkTaskId" class="form-control">
                 <option *ngFor="let task of lstTasks" name="fromTaskProjectId" [value]="task.TaskId">
@@ -22,14 +22,22 @@
             <div class="form-group">
               <label>Employee :</label>
               <select formControlName="formWorkUserId" class="form-control">
-                <option *ngFor="let Project of lstUsers" name="fromTaskProjectId" [value]="Project.UserId">
-                  {{Project.Username}}
+                <option *ngFor="let user of lstUsers" name="fromWorkProjectId" [value]="user.UserId">
+                  {{user.Username}}
                 </option>
               </select>
-            </div>-->
+            </div>
           <div class="form-group">
             <label>Assigned Time</label>
             <input class="form-control" formControlName="formWorkAssignedTime" type="number" step="1">
+          </div>
+          <div class="form-group">
+            <label>Start date of the work :</label>
+            <input formControlName="formWorkStartDate" class="form-control" type="date" name="formWorkStartDate">
+          </div>
+          <div class="form-group">
+            <label>End date of the work :</label>
+            <input formControlName="formWorkEndDate" class="form-control" type="date" name="fromWorkEndDate">
           </div>
             <button class="btn btn-primary" type="submit">Validation</button>
         </form>

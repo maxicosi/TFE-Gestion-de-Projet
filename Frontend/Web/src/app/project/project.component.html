@@ -1,0 +1,28 @@
+<html>
+
+
+  <body>
+    <div>
+      <table>
+        <thead>
+          <th>TaskId</th>
+          <th>Task name</th>
+          <th>Assigned time</th>
+          <th>Time done</th>
+          <th>Start date</th>
+          <th>End date</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks">
+            <td>{{task.TaskId}}</td>
+            <td routerLink="/Task/{{task.TaskId}}">{{task.TaskName}}</td>
+            <td>{{task.AssignedTime}}</td>
+            <td>{{task.TimeDone}}</td>
+            <td>{{task.StartDate}}</td>
+            <td>{{task.EndDate}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+.head {
+  position: relative;
+  padding: 26px 2.5% 16px;
+  z-index: 25;
+}
+
+.navbar{
+  font-size: 20px;
+
+}

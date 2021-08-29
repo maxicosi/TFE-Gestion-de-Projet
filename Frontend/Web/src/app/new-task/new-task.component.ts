@@ -22,8 +22,9 @@ export class NewTaskComponent implements OnInit {
   TaskForm = this.formBuilder.group({
     formTaskProjectId: [null, Validators.required],
     formTaskName: [null, Validators.required],
-    formTaskDescription: [null, Validators.required],
-    formTaskAssignedTime: [null, Validators.required]
+    formTaskAssignedTime: [null, Validators.required],
+    formTaskStartDate:[new Date(), Validators.required],
+    formTaskEndDate:[null, Validators.required]
   })
 
 

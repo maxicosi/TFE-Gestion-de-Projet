@@ -22,6 +22,8 @@ import {CategoryService} from "./services/category.service";
 import {ProjectService} from "./services/project.service";
 import {PostProjectService} from "./services/post-project.service";
 import {PostTaskService} from "./services/post-task.service";
+import { ProjectComponent } from './project/project.component';
+import { TaskComponent } from './task/task.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {PostTaskService} from "./services/post-task.service";
     FilterComponent,
     SearchComponent,
     NewProgrammeComponent,
-    TimesheetComponent
+    TimesheetComponent,
+    ProjectComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

@@ -61,8 +61,8 @@ export class NewProjectComponent implements OnInit {
     //  return;
     //}
     console.log(data);
-    this.postProject.postProject(data).subscribe((s) => {
-      if(s) {
+    this.postProject.postProject(data).subscribe((data) => {
+      if(data) {
         console.log('Project created');
       }
     })

@@ -3,7 +3,6 @@ export class Customer{
   CustomerName: string| undefined;
   CustomerSociety: string | undefined;
   CustomerPhone: string | undefined;
-  Country: string | undefined;
   CustomerMail: string | undefined;
 }
 

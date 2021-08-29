@@ -1,0 +1,23 @@
+<body>
+  <table>
+    <thead>
+      <th>User name</th>
+      <th>Time done</th>
+      <th>Assigned time</th>
+      <th>Start date</th>
+      <th>End date</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let work of works">
+        <td>{{work.Username}}</td>
+        <td>{{work.TimeDone}}</td>
+        <td>{{work.AssignedTime}}</td>
+        <td>{{work.StartDate}}</td>
+        <td>{{work.EndDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+</body>

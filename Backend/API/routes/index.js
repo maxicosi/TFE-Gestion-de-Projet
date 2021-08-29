@@ -25,7 +25,7 @@ router.get('/test', function(req,res,next){
 
 router.get('/users', function(req,res,next){
   console.log('API GET users');
-  res.locals.connection.query('SELECT Username, UserMail, UserPhone, CountryName as Country, RoleName as Role FROM Users join Role on Users.RoleId = Role.RoleId JOIN Country ON Users.CountryId = Country.CountryId', function(error, results, fields) {
+  res.locals.connection.query('SELECT UserId, Username, UserMail, UserPhone, RoleName as Role FROM Users join Role on Users.RoleId = Role.RoleId', function(error, results, fields) {
     if (error!=null) {
       res.redirect(529, '/error');
       console.log("erreur querry");
@@ -39,7 +39,7 @@ router.get('/users', function(req,res,next){
 
 router.get('/projects', function(req,res,next){
   console.log('API GET PostProject');
-  res.locals.connection.query('SELECT ProjectId, ProjectName, CategoryName as Category, CustomerName as Customer, StatusName as Status, TimeDone, description, DATE_FORMAT(StartDate, "%D %b %Y") as StartDate, DATE_FORMAT(EndDate, "%D %b %Y") as EndDate FROM Project JOIN Category ON Project.CategoryId = Category.CategoryId JOIN Status ON Project.StatusId = Status.StatusId JOIN Customers ON Project.CustomerID = Customers.CustomerId', function(error, results, fields) {
+  res.locals.connection.query('SELECT ProjectId, ProjectName, CategoryName as Category, CustomerName as Customer, StatusName as Status, TimeDone, description, DATE_FORMAT(StartDate, "%d %m %Y") as StartDate, DATE_FORMAT(EndDate, "%d %m %Y") as EndDate FROM Project JOIN Category ON Project.CategoryId = Category.CategoryId JOIN Status ON Project.StatusId = Status.StatusId JOIN Customers ON Project.CustomerID = Customers.CustomerId', function(error, results, fields) {
     if (error!=null) {
       res.redirect(529, '/error');
       console.log("erreur querry");
@@ -65,20 +65,6 @@ router.get('/category', function(req,res,next){
   });
 });
 
-router.get('/country', function(req,res,next){
-  console.log('API GET country');
-  res.locals.connection.query('SELECT * FROM Country', function(error, results, fields) {
-    if (error!=null) {
-      res.redirect(529, '/error');
-      console.log("erreur querry");
-    }
-    else {
-      res.send({"status": 200, "error": null, "response": results});
-      console.log("query OK");
-    }
-  });
-});
-
 router.get('/programmes', function(req,res,next){
   console.log('API GET Programme');
   res.locals.connection.query('SELECT * FROM Programme', function(error, results, fields) {
@@ -93,8 +79,60 @@ router.get('/programmes', function(req,res,next){
   });
 });
 
+router.get('/works', function(req,res,next) {
+  let task_id = req.query.TaskId;
+  console.log('API GET Work');
+  if (task_id != undefined) {
+    console.log('test Task' + task_id);
+    res.locals.connection.query('SELECT w.TaskId, t.TaskName, Username, w.AssignedTime, w.TimeDone, DATE_FORMAT(w.StartDate, "%d %m %Y") as StartDate, DATE_FORMAT(w.EndDate, "%d %m %Y") as EndDate FROM Work as w JOIN Users as u ON w.UserId = u.UserId JOIN Task as t ON w.TaskId = t.TaskId WHERE w.TaskId=?', [task_id], function (error, results, fields) {
+      if (error != null) {
+        res.redirect(529, '/error');
+        console.log("erreur querry");
+      } else {
+        res.send({"status": 200, "error": null, "response": results});
+        console.log("query OK");
+      }
+    });
+  } else {
+    res.locals.connection.query('SELECT * FROM Work', function (error, results, fields) {
+      if (error != null) {
+        res.redirect(529, '/error');
+        console.log("erreur querry");
+      } else {
+        res.send({"status": 200, "error": null, "response": results});
+        console.log("query OK");
+      }
+    })
+  }
+});
+
 router.get('/Tasks', function(req,res,next){
+  let project_id = req.query.ProjectId;
+  let task_id = req.body.TaskId
   console.log('API GET Task');
+  if (project_id != undefined) {
+    res.locals.connection.query('SELECT TaskId, TaskName, AssignedTime, TimeDone, DATE_FORMAT(StartDate, "%d %m %Y") as StartDate, DATE_FORMAT(EndDate, "%d %m %Y") as EndDate  FROM Task Where ProjectId=?', [project_id], function(error, results, fields) {
+      if (error!=null) {
+        res.redirect(529, '/error');
+        console.log("erreur querry");
+      }
+      else {
+        res.send({"status": 200, "error": null, "response": results});
+        console.log("query OK");
+      }
+    });
+  } else if (task_id != undefined) {
+    res.locals.connection.query('SELECT TaskId, TaskName, AssignedTime, TimeDone, DATE_FORMAT(StartDate, "%d %m %Y") as StartDate, DATE_FORMAT(EndDate, "%d %m %Y") as EndDate  FROM Task Where TaskId=?', [task_id], function(error, results, fields) {
+      if (error!=null) {
+        res.redirect(529, '/error');
+        console.log("erreur querry");
+      }
+      else {
+        res.send({"status": 200, "error": null, "response": results});
+        console.log("query OK");
+      }
+    });
+  } else {
   res.locals.connection.query('SELECT * FROM Task', function(error, results, fields) {
     if (error!=null) {
       res.redirect(529, '/error');
@@ -104,7 +142,7 @@ router.get('/Tasks', function(req,res,next){
       res.send({"status": 200, "error": null, "response": results});
       console.log("query OK");
     }
-  });
+  })}
 });
 
 router.get('/Status', function(req,res,next){
@@ -123,7 +161,7 @@ router.get('/Status', function(req,res,next){
 
 router.get('/customers', function(req,res,next){
   console.log('API GET customers');
-  res.locals.connection.query('SELECT CustomerId, CustomerName, CustomerSociety, CustomerPhone, CustomerMail, CountryName as Country  FROM Customers JOIN Country ON Customers.CountryId = Country.CountryId', function(error, results, fields) {
+  res.locals.connection.query('SELECT CustomerId, CustomerName, CustomerSociety, CustomerPhone, CustomerMail FROM Customers', function(error, results, fields) {
     if (error!=null) {
       res.redirect(529, '/error');
       console.log("erreur querry");
@@ -137,19 +175,33 @@ router.get('/customers', function(req,res,next){
 
 router.get('/affichage', function(req,res,next){
   console.log('API GET affichage');
-  res.locals.connection.query('SELECT ProjectName,TaskName, CustomerName, StatusName, Work.TimeDone, DATE_FORMAT(StartDate, "%D %b %Y") as StartDate, DATE_FORMAT(EndDate, "%D %b %Y") as EndDate FROM Project JOIN Category ON Project.CategoryId = Category.CategoryId JOIN Status ON Project.StatusId = Status.StatusId JOIN Customers ON Project.CustomerID = Customers.CustomerId JOIN Work ON Project.ProjectId = Work.projectId JOIN Task ON Project.ProjectId = Task.ProjectId', function(error, results, fields) {
-    if (error!=null) {
-      res.redirect(529, '/error');
-      console.log("erreur querry");
-    }
-    else {
-      res.send({"status": 200, "error": null, "response": results});
-      console.log("query OK");
-    }
-  });
-});
+  let project_id = req.query.ProjectId;
 
-module.exports = router;
+  if (project_id != undefined){
+    console.log('Get affichage by id' + project_id)
+    res.locals.connection.query('SELECT ProjectId, ProjectName, CategoryName as Category, StatusName as Status, TimeDone, DATE_FORMAT(StartDate, "%d %m %Y") as StartDate, DATE_FORMAT(EndDate, "%d %m %Y") as EndDate, description FROM Project JOIN Category ON Project.CategoryId = Category.CategoryId JOIN Status ON Project.StatusId = Status.StatusId WHERE ProjectId=?', [project_id],function(error, results, fields) {
+      if (error!=null) {
+        res.redirect(529, '/error');
+        console.log("erreur querry");
+      }
+      else {
+        res.send({"status": 200, "error": null, "response": results});
+        console.log("query OK");
+      }
+    });
+  } else {
+    res.locals.connection.query('SELECT ProjectId, ProjectName, CategoryName as Category, StatusName as Status, TimeDone, DATE_FORMAT(StartDate, "%d %m %Y") as StartDate, DATE_FORMAT(EndDate, "%d %m %Y") as EndDate, description FROM Project JOIN Category ON Project.CategoryId = Category.CategoryId JOIN Status ON Project.StatusId = Status.StatusId', function(error, results, fields) {
+      if (error!=null) {
+        res.redirect(529, '/error');
+        console.log("erreur querry");
+      }
+      else {
+        res.send({"status": 200, "error": null, "response": results});
+        console.log("query OK");
+      }
+    });
+  }
+  });
 
 /* POST */
 
@@ -172,7 +224,7 @@ router.post('/postProject', function (req, res, next) {
 router.post('/postTask', function (req, res, next) {
   console.log(req.body);
   console.log('POST TASK');
-  res.locals.connection.query('INSERT INTO Task (TaskName, ProjectId, TimeDone, AssignedTime) VALUES (?, ?, ?, ?)',[req.body.formTaskName, req.body.formTaskProjectId, 0, req.body.formTaskAssignedTime], function (error, results, fields) {
+  res.locals.connection.query('INSERT INTO Task (TaskName, ProjectId, TimeDone, AssignedTime, StartDate, EndDate) VALUES (?, ?, ?, ?, ?, ?)',[req.body.formTaskName, req.body.formTaskProjectId, 0, req.body.formTaskAssignedTime, req.body.formTaskStartDate, req.body.formTaskEndDate], function (error, results, fields) {
     if (error!=null) {
       res.redirect(529, '/error');
       console.log(error);
@@ -186,8 +238,8 @@ router.post('/postTask', function (req, res, next) {
 
 router.post('/postWork', function (req, res, next) {
   console.log(req.body);
-  console.log('POST TASK');
-  res.locals.connection.query('INSERT INTO Work (ProjectId, TaskId, UserId, TimeDone, AssignedTime) VALUES (?, ?, ?, ?, ?)',[req.body.formWorkProjectId, req.body.formWorkTaskId, req.body.formWorkUserId,0, formWorkAssignedTime], function (error, results, fields) {
+  console.log('POST work');
+  res.locals.connection.query('INSERT INTO Work (ProjectId, TaskId, UserId, AssignedTime, TimeDone, StarDate, EndDate) VALUES (?, ?, ?, ?, ?, ?, ?)',[req.body.formWorkProjectId, req.body.formWorkTaskId, req.body.formWorkUserId, req.body.formWorkAssignedTime, 0, req.body.formWorkStartDate, req.body.formWorkEndDate], function (error, results, fields) {
     if (error!=null) {
       res.redirect(529, '/error');
       console.log(error);
@@ -215,3 +267,5 @@ router.post('/postProgramme', function (req, res, next) {
     }
   });
 });
+
+module.exports = router;
