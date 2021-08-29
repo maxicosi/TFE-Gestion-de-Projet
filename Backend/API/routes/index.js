@@ -239,7 +239,7 @@ router.post('/postTask', function (req, res, next) {
 router.post('/postWork', function (req, res, next) {
   console.log(req.body);
   console.log('POST work');
-  res.locals.connection.query('INSERT INTO Work (ProjectId, TaskId, UserId, AssignedTime, TimeDone, StarDate, EndDate) VALUES (?, ?, ?, ?, ?, ?, ?)',[req.body.formWorkProjectId, req.body.formWorkTaskId, req.body.formWorkUserId, req.body.formWorkAssignedTime, 0, req.body.formWorkStartDate, req.body.formWorkEndDate], function (error, results, fields) {
+  res.locals.connection.query('INSERT INTO Work (ProjectId, TaskId, UserId, AssignedTime, TimeDone, StartDate, EndDate) VALUES (?, ?, ?, ?, ?, ?, ?)',[req.body.formWorkProjectId, req.body.formWorkTaskId, req.body.formWorkUserId, req.body.formWorkAssignedTime, 0, req.body.formWorkStartDate, req.body.formWorkEndDate], function (error, results, fields) {
     if (error!=null) {
       res.redirect(529, '/error');
       console.log(error);

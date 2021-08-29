@@ -9,5 +9,4 @@ export class PostTask {
     StartDate: Date,
     EndDate: Date
   ){}
-
 }

@@ -27,6 +27,8 @@ export class TaskComponent implements OnInit {
         // @ts-ignore
         this.detail = data[Object.keys(data)[2]][0];
         console.log(this.detail)
+        this.detail.StartDate = new Date(this.detail.StartDate)
+        this.detail.EndDate = new Date(this.detail.EndDate)
       })
     this.http.get(environment.apiUrl + '/Works?TaskId=' + this.askedroute)
       .subscribe((res) => {
@@ -34,6 +36,9 @@ export class TaskComponent implements OnInit {
         this.works = res[Object.keys(res)[2]];
         console.log(this.works)
       })
+
+
   }
 }
+
 

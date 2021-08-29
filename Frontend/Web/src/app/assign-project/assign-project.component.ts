@@ -58,8 +58,6 @@ export class AssignProjectComponent implements OnInit {
       )
   }
 
-
-
   submit() {
     if(this.workForm.invalid) {
       console.log('Formulaire invalide !');

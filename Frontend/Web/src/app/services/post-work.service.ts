@@ -8,6 +8,7 @@ import {PostWork} from "../classes/post-work";
   providedIn: 'root'
 })
 export class PostWorkService {
+
   constructor(
     private http: HttpClient
   ){}

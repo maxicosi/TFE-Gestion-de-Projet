@@ -4,7 +4,6 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {PostTask} from "../classes/post-task";
 
-
 @Injectable({
   providedIn: 'root'
 })
